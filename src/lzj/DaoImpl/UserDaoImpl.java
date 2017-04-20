@@ -106,4 +106,32 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		return arrayListUser;
 	}
 
+	@Override
+	public User findUserByUserNameAndPassword(String username, String pwd) {
+		String sql = "SELECT * FROM shop.user_list where username=? and password=?;";
+		Object[] o = { username,pwd };
+		ResultSet rs = this.execeuteQuary(sql, o);
+		boolean hasUser = false;
+		User user = new User();
+		try {
+			if (rs.next()) {
+				user.setArrayListAdress(new AddressDaoImpl().findAddressByUid(rs.getInt("uid")));
+				user.setArrayListOrder(new OrderDaoImpl().findOrderByUid(rs.getInt("uid")));
+				user.setIcon(rs.getString("icon"));
+				user.setPassword(rs.getString("password"));
+				user.setShopCar(new ShopCarDaoImpl().findShopCarByUid(rs.getInt("uid")));
+				user.setUid(rs.getInt("uid"));
+				user.setUsername(rs.getString("username"));
+				user.setUserType(rs.getInt("usertype"));
+				hasUser=true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(hasUser){
+			return user;
+		}
+		return null;
+	}
+
 }

@@ -36,25 +36,25 @@ public class Test {
 		// a.add(g);
 		// OrderDaoImpl od = new OrderDaoImpl();
 
-//		ShopCarDaoImpl sc = new ShopCarDaoImpl();
-//		ShopCar shopCar = new ShopCar(111, 12, 1, 2);
-//		sc.addShopCar(shopCar);
-//		ArrayList<ShopCar> a = sc.findShopCarByUid(1);
-//		for (ShopCar shopCar2 : a) {
-//			System.out.println(shopCar2.toString());
-//		}
-//		GoodsDaoImpl gd = new GoodsDaoImpl();
-//		
-//		ArrayList<Goods> g = gd.findGoodsByGoodsName("1");
-//		OrderDaoImpl od =new OrderDaoImpl();
-//		AddressDaoImpl adi = new AddressDaoImpl();
-//		
-//		Address ad = adi.findAddressByUid(1).get(0);
-//		
-//		Order order  = new Order(1, g, null, 111, 0, null, ad);
-//		od.addOrder(order);
-//		Order o = od.findOrderByOid(2).get(0);
-//		System.out.println(o.toString());
+		// ShopCarDaoImpl sc = new ShopCarDaoImpl();
+		// ShopCar shopCar = new ShopCar(111, 12, 1, 2);
+		// sc.addShopCar(shopCar);
+		// ArrayList<ShopCar> a = sc.findShopCarByUid(1);
+		// for (ShopCar shopCar2 : a) {
+		// System.out.println(shopCar2.toString());
+		// }
+		// GoodsDaoImpl gd = new GoodsDaoImpl();
+		//
+		// ArrayList<Goods> g = gd.findGoodsByGoodsName("1");
+		// OrderDaoImpl od =new OrderDaoImpl();
+		// AddressDaoImpl adi = new AddressDaoImpl();
+		//
+		// Address ad = adi.findAddressByUid(1).get(0);
+		//
+		// Order order = new Order(1, g, null, 111, 0, null, ad);
+		// od.addOrder(order);
+		// Order o = od.findOrderByOid(2).get(0);
+		// System.out.println(o.toString());
 		UserDaoImpl ud = new UserDaoImpl();
 		ArrayList<User> userlist = ud.findUserByUid(1);
 		for (User user : userlist) {
@@ -62,5 +62,4 @@ public class Test {
 		}
 	}
 
-	
 }

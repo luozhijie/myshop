@@ -16,4 +16,6 @@ public interface UserDao {
 	public ArrayList<User> findUserByUserName(String userName);
 	
 	public ArrayList<User> findUserByPage(int page);
+	
+	public User findUserByUserNameAndPassword(String username,String pwd);
 }
