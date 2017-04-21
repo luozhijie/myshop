@@ -61,4 +61,20 @@ public class RememberMeDaoImpl extends BaseDao implements RememberMeDao {
 		return rememberMe;
 	}
 
+	@Override
+	public RememberMe findRememberMyByUidAndMd5(int uid, String md5) {
+		String sql = "SELECT * FROM shop.remberme where uid = ? and md5 = ?;";
+		Object[] o = { uid, md5 };
+		ResultSet rs = this.execeuteQuary(sql, o);
+		RememberMe rememberMe = null;
+		try {
+			if (rs.next()) {
+				rememberMe = new RememberMe(rs.getInt("uid"), rs.getString("md5"), rs.getString("ip"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rememberMe;
+	}
+
 }

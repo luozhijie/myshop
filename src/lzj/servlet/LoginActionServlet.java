@@ -76,6 +76,8 @@ public class LoginActionServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			request.getSession().setAttribute("user", user);
+			response.sendRedirect("ShopIndex.jsp");
 		} else {
 			// request.setCharacterEncoding("utf-8");
 			// response.setCharacterEncoding("utf-8");

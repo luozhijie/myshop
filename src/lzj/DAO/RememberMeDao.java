@@ -12,4 +12,6 @@ public interface RememberMeDao {
 	public RememberMe findRemeberMeByUid(int uid);
 
 	public RememberMe findRemeberMeByMd5(String md5);
+
+	public RememberMe findRememberMyByUidAndMd5(int uid, String md5);
 }
