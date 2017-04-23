@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Goods {
 	private int goodsId;// 商品id
 	private String goodsName;// 商品名
-	private String goodsUpUserName;// 商品上传者名
+	private String goodsUpUserName;// 商品上传者
 	private String goodsInfo;// 商品介绍
 	private Category goodsCategory;// 商品类别
 	private String[] goodsimg = new String[5];// 商品图片名

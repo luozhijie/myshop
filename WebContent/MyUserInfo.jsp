@@ -1,3 +1,7 @@
+<%@page import="lzj.DAO.AddressDao"%>
+<%@page import="lzj.entity.Address"%>
+<%@page import="lzj.DaoImpl.AddressDaoImpl"%>
+<%@page import="lzj.entity.Order"%>
 <%@page import="lzj.DaoImpl.OrderDaoImpl"%>
 <%@page import="lzj.DAO.OrderDao"%>
 <%@page import="lzj.DaoImpl.UserDaoImpl"%>
@@ -16,7 +20,6 @@
 		return;
 	}
 	user = new UserDaoImpl().findUserByUid(user.getUid()).get(0);
-	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -32,6 +35,7 @@
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<a href="ShopIndex.jsp">首页</a>
 	<p>
 		<img alt="" src="usericon/<%=user.getIcon()%>">
 	</p>
@@ -64,6 +68,7 @@
 
 				for (ShopCar shopcar : user.getShopCar()) {
 					Goods goods = goodsdao.findGoods(shopcar.getGoodsId());
+					if (goods != null) {
 			%>
 			<tr>
 				<td><%=goods.getGoodsName()%></td>
@@ -77,10 +82,28 @@
 			</tr>
 			<%
 				totalprice += (goods.getGoodsPrice() * shopcar.getNum());
+					}
 				}
 			%>
+
 			<tr>
-				<td><a href="Order">下订单</a></td>
+				<td>
+					<form action="Order" method="get">
+						<select name="sid">
+							<%
+								AddressDao addressDao = new AddressDaoImpl();
+								ArrayList<Address> addressList = addressDao.findAddressByUid(user.getUid());
+							%>
+							<%
+								for (Address address : addressList) {
+							%>
+							<option value="<%=address.getAdressId()%>"><%=address.getSendName() + "  " + address.getAdress() + "  " + address.getPhoneNumber()%></option>
+							<%
+								}
+							%>
+						</select> <input type="submit" value="下订单">
+					</form>
+				</td>
 				<td></td>
 				<td></td>
 				<td>总价格:<%=totalprice%></td>
@@ -90,25 +113,60 @@
 	</table>
 
 	<%
-	
 		OrderDao orderDao = new OrderDaoImpl();
-	ArrayList
+		ArrayList<Order> al = orderDao.findOrderByUid(user.getUid());
 	%>
 	<table class="table table-bordered">
 		<caption>订单列表</caption>
 		<thead>
 			<tr>
+				<th>订单ID</th>
 				<th>物品</th>
 				<th>数量</th>
 				<th>价格</th>
 				<th>时间</th>
-
+				<th>总价</th>
 			</tr>
 		</thead>
 		<tbody>
+			<%
+				for (Order o : al) {
+					ArrayList<Goods> alg = o.getArrayListGoods();
+			%>
+
 			<tr>
-				<td></td>
+
+
+				<td><%=o.getOrderId()%></td>
+				<td>
+					<%
+						for (Goods g : alg) {
+					%> <%=g.getGoodsName()%><br> <%
+ 	}
+ %>
+				</td>
+				<td>
+					<%
+						for (Goods g : alg) {
+					%> <%=g.getNum()%><br> <%
+ 	}
+ %>
+				</td>
+				<td>
+					<%
+						for (Goods g : alg) {
+					%> <%=g.getGoodsPrice()%><br> <%
+ 	}
+ %>
+				</td>
+				<td><%=o.getTime()%></td>
+				<td><%=o.getTotalPrice()%></td>
+
 			</tr>
+
+			<%
+				}
+			%>
 		</tbody>
 
 	</table>

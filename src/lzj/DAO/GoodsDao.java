@@ -18,4 +18,6 @@ public interface GoodsDao {
 	public ArrayList<Goods> findGoodsByPage(int page);
 	
 	public Goods findGoods(int gid);
+	
+	public int downNum(int gid, int num);
 }

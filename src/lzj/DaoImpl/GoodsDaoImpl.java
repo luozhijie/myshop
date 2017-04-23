@@ -12,10 +12,10 @@ public class GoodsDaoImpl extends BaseDao implements GoodsDao {
 
 	@Override
 	public int addGoods(Goods goods) {
-		String sql = "INSERT INTO `shop`.`good_list` (`uid`, `goodname`, `goodinfo`, `goodcategoryid`, `goodimg1`, `goodimg2`, `goodimg3`, `goodimg4`, `goodimg5`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
-		Object[] o = { goods.getGoodsUpUserName(), goods.getGoodsName(), goods.getGoodsInfo(),
+		String sql = "INSERT INTO `shop`.`good_list` (`num`,`uid`, `goodname`, `goodinfo`, `goodcategoryid`, `goodimg1`, `goodimg2`, `goodimg3`, `goodimg4`, `goodimg5`,`goodprice`) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?,?);";
+		Object[] o = { goods.getNum(), goods.getGoodsUpUserName(), goods.getGoodsName(), goods.getGoodsInfo(),
 				goods.getGoodsCategory().getCid(), goods.getGoodsimg()[0], goods.getGoodsimg()[1],
-				goods.getGoodsimg()[2], goods.getGoodsimg()[3], goods.getGoodsimg()[4] };
+				goods.getGoodsimg()[2], goods.getGoodsimg()[3], goods.getGoodsimg()[4], goods.getGoodsPrice() };
 		return this.exceuteUpdate(sql, o);
 	}
 
@@ -28,10 +28,10 @@ public class GoodsDaoImpl extends BaseDao implements GoodsDao {
 
 	@Override
 	public int updateGoods(Goods goods) {
-		String sql = "UPDATE `shop`.`good_list` SET `uid`=?, `goodname`=?, `goodinfo`=?, `goodcategoryid`=?, `goodimg1`=?, `goodimg2`=?, `goodimg3`=?, `goodimg4`=?, `goodimg5`=? WHERE `gid`=?;";
-		Object[] o = { goods.getGoodsUpUserName(), goods.getGoodsName(), goods.getGoodsInfo(),
-				goods.getGoodsCategory().getCid(), goods.getGoodsimg()[0], goods.getGoodsimg()[1],
-				goods.getGoodsimg()[2], goods.getGoodsimg()[3], goods.getGoodsimg()[4] };
+		String sql = "UPDATE `shop`.`good_list` SET `num`=?,`goodprice`=?,`uid`=?, `goodname`=?, `goodinfo`=?, `goodcategoryid`=?, `goodimg1`=?, `goodimg2`=?, `goodimg3`=?, `goodimg4`=?, `goodimg5`=? WHERE `gid`=?;";
+		Object[] o = { goods.getNum(), goods.getGoodsPrice(), goods.getGoodsUpUserName(), goods.getGoodsName(),
+				goods.getGoodsInfo(), goods.getGoodsCategory().getCid(), goods.getGoodsimg()[0], goods.getGoodsimg()[1],
+				goods.getGoodsimg()[2], goods.getGoodsimg()[3], goods.getGoodsimg()[4], goods.getGoodsId() };
 		return this.exceuteUpdate(sql, o);
 	}
 
@@ -80,7 +80,7 @@ public class GoodsDaoImpl extends BaseDao implements GoodsDao {
 	@Override
 	public ArrayList<Goods> findGoodsByPage(int page) {
 		int num = (page - 1) * 10;
-		String sql = "SELECT * FROM shop.v_goods_category_username limit ,10;";
+		String sql = "SELECT * FROM shop.v_goods_category_username limit ?,10;";
 		Object[] o = { num };
 		ArrayList<Goods> arrayListGoods = new ArrayList<>();
 		ResultSet rs = this.execeuteQuary(sql, o);
@@ -106,6 +106,13 @@ public class GoodsDaoImpl extends BaseDao implements GoodsDao {
 			return null;
 		}
 		return goods.get(0);
+	}
+
+	@Override
+	public int downNum(int gid, int num) {
+		String sql = "UPDATE `shop`.`good_list` SET `num`=`num`-? WHERE `gid`=?;";
+		Object[] o = { num, gid };
+		return this.exceuteUpdate(sql, o);
 	}
 
 }
