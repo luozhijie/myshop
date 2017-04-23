@@ -11,4 +11,6 @@ public interface AddressDao {
 	public int updateAddress(Address address);
 
 	public ArrayList<Address> findAddressByUid(int uid);
+	
+	public Address findAddressByAid(int sid);
 }

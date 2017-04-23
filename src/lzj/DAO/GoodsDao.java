@@ -16,4 +16,6 @@ public interface GoodsDao {
 	public ArrayList<Goods> findGoodsByGoodsName(String goodName);
 	
 	public ArrayList<Goods> findGoodsByPage(int page);
+	
+	public Goods findGoods(int gid);
 }

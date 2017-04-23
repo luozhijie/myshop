@@ -41,14 +41,15 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 	@Override
 	public ArrayList<Order> findOrderByUid(int uid) {
 		String sql = "SELECT * FROM order_list where uid=?;";
-		Object[] o = {uid};
+		Object[] o = { uid };
 		ResultSet rs = this.execeuteQuary(sql, o);
 		ArrayList<Order> arrayListOrder = new ArrayList<>();
 		try {
-			while(rs.next()){
+			while (rs.next()) {
 				Order order = new Order();
 				order.setAdress(new AddressDaoImpl().findAddressByUid(rs.getInt("uid")).get(0));
-				order.setArrayListGoods(gson.fromJson(rs.getString("orderinfo"), new TypeToken<ArrayList<Goods>>(){}.getType()));
+				order.setArrayListGoods(gson.fromJson(rs.getString("orderinfo"), new TypeToken<ArrayList<Goods>>() {
+				}.getType()));
 				order.setOrderId(rs.getInt("oid"));
 				order.setOrderInfo(rs.getString("orderinfo"));
 				order.setTime(rs.getString("orderdate"));
@@ -65,14 +66,15 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 	@Override
 	public ArrayList<Order> findOrderByOid(int oid) {
 		String sql = "SELECT * FROM order_list where oid=?;";
-		Object[] o = {oid};
+		Object[] o = { oid };
 		ResultSet rs = this.execeuteQuary(sql, o);
 		ArrayList<Order> arrayListOrder = new ArrayList<>();
 		try {
-			while(rs.next()){
+			while (rs.next()) {
 				Order order = new Order();
 				order.setAdress(new AddressDaoImpl().findAddressByUid(rs.getInt("sid")).get(0));
-				order.setArrayListGoods(gson.fromJson(rs.getString("orderinfo"), new TypeToken<ArrayList<Goods>>(){}.getType()));
+				order.setArrayListGoods(gson.fromJson(rs.getString("orderinfo"), new TypeToken<ArrayList<Goods>>() {
+				}.getType()));
 				order.setOrderId(rs.getInt("oid"));
 				order.setOrderInfo(rs.getString("orderinfo"));
 				order.setTime(rs.getString("orderdate"));
@@ -89,14 +91,15 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 	@Override
 	public ArrayList<Order> findOrderByUidPage(int uid, int page) {
 		String sql = "SELECT * FROM shop.order_list where uid=? limit ?,10;";
-		Object[] o = {uid,page};
+		Object[] o = { uid, page };
 		ResultSet rs = this.execeuteQuary(sql, o);
 		ArrayList<Order> arrayListOrder = new ArrayList<>();
 		try {
-			while(rs.next()){
+			while (rs.next()) {
 				Order order = new Order();
 				order.setAdress(new AddressDaoImpl().findAddressByUid(rs.getInt("sid")).get(0));
-				order.setArrayListGoods(gson.fromJson(rs.getString("orderinfo"), new TypeToken<ArrayList<Goods>>(){}.getType()));
+				order.setArrayListGoods(gson.fromJson(rs.getString("orderinfo"), new TypeToken<ArrayList<Goods>>() {
+				}.getType()));
 				order.setOrderId(rs.getInt("oid"));
 				order.setOrderInfo(rs.getString("orderinfo"));
 				order.setTime(rs.getString("orderdate"));

@@ -9,7 +9,6 @@ import lzj.entity.Address;
 
 public class AddressDaoImpl extends BaseDao implements AddressDao {
 
-	
 	@Override
 	public int addAddress(Address address) {
 		String sql = "INSERT INTO `shop`.`send_address_list` (`uid`, `address`, `phonenumber`, `name`) VALUES (?, ?, ?, ?);";
@@ -34,17 +33,35 @@ public class AddressDaoImpl extends BaseDao implements AddressDao {
 	@Override
 	public ArrayList<Address> findAddressByUid(int uid) {
 		String sql = "SELECT * FROM shop.send_address_list where uid= ? ;";
-		ResultSet rs = this.execeuteQuary(sql, new Object[]{uid});
+		ResultSet rs = this.execeuteQuary(sql, new Object[] { uid });
 		ArrayList<Address> arrayListAdress = new ArrayList<>();
 		try {
-			while(rs.next()){
-				Address address = new Address(rs.getInt("sid"), rs.getString("address"), rs.getString("phonenumber"), rs.getString("name"), rs.getInt(uid));
+			while (rs.next()) {
+				Address address = new Address(rs.getInt("sid"), rs.getString("address"), rs.getString("phonenumber"),
+						rs.getString("name"), rs.getInt("uid"));
 				arrayListAdress.add(address);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return arrayListAdress;
+	}
+
+	@Override
+	public Address findAddressByAid(int sid) {
+		String sql = "SELECT * FROM shop.send_address_list where sid= ? ;";
+		ResultSet rs = this.execeuteQuary(sql, new Object[] { sid });
+		ArrayList<Address> arrayListAdress = new ArrayList<>();
+		try {
+			while (rs.next()) {
+				Address address = new Address(rs.getInt("sid"), rs.getString("address"), rs.getString("phonenumber"),
+						rs.getString("name"), rs.getInt("uid"));
+				arrayListAdress.add(address);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return arrayListAdress.get(0);
 	}
 
 }

@@ -64,4 +64,28 @@ public class ShopCarDaoImpl extends BaseDao implements ShopCarDao {
 		}
 		return arrayListShopCar;
 	}
+
+	@Override
+	public ShopCar findShopCarByUidEntity(int uid) {
+		ArrayList<ShopCar> shopcar = this.findShopCarByUid(uid);
+		if (shopcar.isEmpty()) {
+			return null;
+		}
+		return shopcar.get(0);
+	}
+
+	@Override
+	public int delShopCarByUidAndGid(ShopCar shopCar) {
+		String sql = "DELETE FROM `shop`.`shop_car` WHERE `gid`=? and `uid`=?;";
+		Object[] o = { shopCar.getGoodsId(), shopCar.getUserId() };
+		System.out.println(shopCar.getGoodsId() + "     " + shopCar.getUserId());
+		return this.exceuteUpdate(sql, o);
+	}
+
+	@Override
+	public int updateNum(int uid, int gid, int num) {
+		String sql = "UPDATE `shop`.`shop_car` SET  `num`=? WHERE `uid`=? and `gid`=?;";
+		Object[] o = { num, uid, gid };
+		return this.exceuteUpdate(sql, o);
+	}
 }

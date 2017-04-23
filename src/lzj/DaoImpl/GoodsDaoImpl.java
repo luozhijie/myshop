@@ -68,7 +68,7 @@ public class GoodsDaoImpl extends BaseDao implements GoodsDao {
 				String[] img = { rs.getString("goodimg1"), rs.getString("goodimg2"), rs.getString("goodimg3"),
 						rs.getString("goodimg4"), rs.getString("goodimg5") };
 				Goods goods = new Goods(rs.getInt("gid"), rs.getString("goodname"), rs.getString("username"),
-						rs.getString("goodinfo"), category, img, rs.getDouble("goodprice"),rs.getInt("num"));
+						rs.getString("goodinfo"), category, img, rs.getDouble("goodprice"), rs.getInt("num"));
 				arrayListGoods.add(goods);
 			}
 		} catch (SQLException e) {
@@ -97,6 +97,15 @@ public class GoodsDaoImpl extends BaseDao implements GoodsDao {
 			e.printStackTrace();
 		}
 		return arrayListGoods;
+	}
+
+	@Override
+	public Goods findGoods(int gid) {
+		ArrayList<Goods> goods = this.findGoodsByGid(gid);
+		if (goods.isEmpty()) {
+			return null;
+		}
+		return goods.get(0);
 	}
 
 }

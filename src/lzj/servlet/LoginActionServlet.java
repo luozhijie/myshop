@@ -2,6 +2,7 @@ package lzj.servlet;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import lzj.DAO.RememberMeDao;
 import lzj.DAO.UserDao;
 import lzj.DaoImpl.RememberMeDaoImpl;
@@ -39,8 +39,9 @@ public class LoginActionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// response.getWriter().append("Served at:
-		// ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("utf-8");
 	}
 
 	/**
@@ -50,6 +51,16 @@ public class LoginActionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
+		String rand = (String) request.getSession().getAttribute("rand");
+		String input = (String) request.getParameter("yzm");
+		System.out.println(rand);
+		System.out.println(input);
+		String yzmcw = URLEncoder.encode("验证码错误", "UTF-8");
+		if (rand.equals(input)) {
+		} else {
+			response.getWriter().print(
+					"<script type='javascript/text' language='javascript'>alert('验证码错误');window.location.href='Login.jsp';</script>");
+		}
 		UserDao userdao = new UserDaoImpl();
 		RememberMeDao rememberMeDao = new RememberMeDaoImpl();
 		String username = request.getParameter("username");
@@ -79,10 +90,8 @@ public class LoginActionServlet extends HttpServlet {
 			request.getSession().setAttribute("user", user);
 			response.sendRedirect("ShopIndex.jsp");
 		} else {
-			// request.setCharacterEncoding("utf-8");
-			// response.setCharacterEncoding("utf-8");
-			// Writer out = response.getWriter();
-			// out.write("用户名或密码错误");
+			response.getWriter().print(
+					"<script type='javascript/text' language='javascript'>alert('用户名或密码错误');window.location.href='Login.jsp';</script>");
 		}
 		Cookie[] cookies = request.getCookies();
 		for (int i = 0; i < cookies.length; i++) {

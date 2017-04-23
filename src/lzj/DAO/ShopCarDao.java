@@ -14,4 +14,10 @@ public interface ShopCarDao {
 	public ArrayList<ShopCar> findShopCarByUid(int uid);
 
 	public ArrayList<ShopCar> findShopCarByUidPage(int uid, int page);
+	
+	public ShopCar findShopCarByUidEntity(int uid);
+	
+	public int delShopCarByUidAndGid(ShopCar shopCar);
+	
+	public int updateNum(int uid, int gid, int num);
 }

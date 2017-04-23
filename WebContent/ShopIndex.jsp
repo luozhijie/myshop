@@ -37,13 +37,28 @@
 			if (sessionUser == null) {
 				UserDao userdao = new UserDaoImpl();
 				user = userdao.findUserByUid(uid).get(0);
+				session.setAttribute("user", user);
 			} else {
 				user = sessionUser;
 			}
 	%>
-	欢迎：<%=user.getUsername()%>
+	欢迎：<%=user.getUsername()%><a href="DelLogin">注销</a>
+	<br>
+	<%
+		if (user.getUserType() == 0) {
+				out.print("<a href='ManagerUser.jsp'>管理用户</a>");
+			}
+			if (user.getUserType() == 1) {
+				out.print("<a href='ManagerShop.jsp'>管理商品</a>");
+			}
+	%>
+	<br>
+	<a href="MyUserInfo.jsp">个人中心</a>
 	<%
 		}
+		
 	%>
+
+
 </body>
 </html>
