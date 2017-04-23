@@ -26,6 +26,7 @@
 </head>
 <body>
 	<a href="AddGoods.jsp">添加商品</a>
+	<a href="AddGoodsCategory.jsp">添加商品种类</a>
 	<table class="table">
 		<caption>商品列表</caption>
 		<thead>
@@ -49,7 +50,8 @@
 				<td><%=g.getGoodsCategory().getCateGoryName()%></td>
 				<td><%=g.getNum()%></td>
 				<td><%=g.getGoodsPrice()%></td>
-				<td><a href="DelGoods?gid=<%=g.getGoodsId()%>">删除商品</a><a href="EditGoods.jsp?gid=<%=g.getGoodsId()%>">修改商品</a></td>
+				<td><a href="DelGoods?gid=<%=g.getGoodsId()%>">删除商品</a><a
+					href="EditGoods.jsp?gid=<%=g.getGoodsId()%>">修改商品</a></td>
 			</tr>
 			<%
 				}
