@@ -87,8 +87,9 @@
 			%>
 
 			<tr>
-				<td>
+				<td><a href="AddressManager.jsp">地址管理</a>
 					<form action="Order" method="get">
+
 						<select name="sid">
 							<%
 								AddressDao addressDao = new AddressDaoImpl();
@@ -102,8 +103,7 @@
 								}
 							%>
 						</select> <input type="submit" value="下订单">
-					</form>
-				</td>
+					</form></td>
 				<td></td>
 				<td></td>
 				<td>总价格:<%=totalprice%></td>

@@ -59,6 +59,7 @@ public class OrderServlet extends HttpServlet {
 		Order order = new Order(user.getUid(), gal, "", price, 0, "",
 				new AddressDaoImpl().findAddressByAid(Integer.valueOf(request.getParameter("sid"))));
 		orderdao.addOrder(order);
+		response.sendRedirect("MyUserInfo.jsp");
 	}
 
 	/**

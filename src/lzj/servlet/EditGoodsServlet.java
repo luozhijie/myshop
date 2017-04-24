@@ -60,6 +60,7 @@ public class EditGoodsServlet extends HttpServlet {
 		goods.setNum(num);
 		goods.setGoodsimg(new String[] { "", "", "", "", "" });
 		goodsDao.updateGoods(goods);
+		response.sendRedirect("ShopManager.jsp");
 	}
 
 }

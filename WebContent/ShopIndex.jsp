@@ -21,6 +21,10 @@
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<form action="SearchShop.jsp" method="post">
+		<input type="text" name="searchkey"> <input type="submit"
+			value="搜索">
+	</form>
 	<%
 		int uid = 0;
 		String md5 = "";

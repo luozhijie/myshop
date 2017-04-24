@@ -41,6 +41,7 @@ public class AddShopCarServlet extends HttpServlet {
 		} else {
 			shopCarDao.addShopCarNum(user.getUid(), gid);
 		}
+		response.sendRedirect("MyUserInfo");
 	}
 
 	/**

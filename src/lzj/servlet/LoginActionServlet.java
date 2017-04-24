@@ -39,9 +39,9 @@ public class LoginActionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		response.setContentType("utf-8");
 	}
 
 	/**
@@ -53,13 +53,11 @@ public class LoginActionServlet extends HttpServlet {
 		doGet(request, response);
 		String rand = (String) request.getSession().getAttribute("rand");
 		String input = (String) request.getParameter("yzm");
-		System.out.println(rand);
-		System.out.println(input);
-		String yzmcw = URLEncoder.encode("验证码错误", "UTF-8");
 		if (rand.equals(input)) {
 		} else {
-			response.getWriter().print(
-					"<script type='javascript/text' language='javascript'>alert('验证码错误');window.location.href='Login.jsp';</script>");
+			System.out.println("yzmcw");
+			response.getWriter()
+					.print("<script language='JavaScript'>alert('验证码错误');window.location.href='Login.jsp';</script>");
 		}
 		UserDao userdao = new UserDaoImpl();
 		RememberMeDao rememberMeDao = new RememberMeDaoImpl();
@@ -91,7 +89,7 @@ public class LoginActionServlet extends HttpServlet {
 			response.sendRedirect("ShopIndex.jsp");
 		} else {
 			response.getWriter().print(
-					"<script type='javascript/text' language='javascript'>alert('用户名或密码错误');window.location.href='Login.jsp';</script>");
+					"<script language='JavaScript'>alert('用户名或密码错误');window.location.href='Login.jsp';</script>");
 		}
 		Cookie[] cookies = request.getCookies();
 		for (int i = 0; i < cookies.length; i++) {
@@ -102,46 +100,5 @@ public class LoginActionServlet extends HttpServlet {
 				System.out.println(cookies[i].getValue());
 			}
 		}
-		// UserDao userdao = new UserDaoImpl();
-		// RememberMeDao rememberMeDao = new RememberMeDaoImpl();
-		// User user = null;
-		// Cookie[] cookies = request.getCookies();
-		// String myshopMd5 = null;
-		// if (cookies == null) {
-		// } else {
-		// for (int i = 0; i < cookies.length; i++) {
-		// // 获得具体的Cookie
-		// Cookie cookie = cookies[i];
-		// // 获得Cookie的名称
-		// if (cookie.getName().equals("myshopmd5")) {
-		// myshopMd5 = cookie.getValue();
-		// if (rememberMeDao.findRemeberMeByMd5(myshopMd5) == null) {
-		// myshopMd5 = null;
-		// }
-		// }
-		// }
-		// }
-		// if (myshopMd5 == null) {
-		// String username = request.getParameter("username");
-		// String password = request.getParameter("password");
-		// String[] rember = request.getParameterValues("remeberme");
-		// user = userdao.findUserByUserNameAndPassword(username, password);
-		// if (rember != null) {
-		// try {
-		// Cookie cookie = new Cookie("myshopmd5",
-		// Md5Tools.EncoderByMd5(Math.random() + "pwd"));
-		// cookie.setMaxAge(60 * 60 * 24 * 15);
-		// response.addCookie(cookie);
-		// rememberMeDao.addRemeberMe(
-		// new RememberMe(user.getUid(), cookie.getValue(),
-		// GetIpAdderss.getIpAddr(request)));
-		// } catch (NoSuchAlgorithmException e) {
-		// e.printStackTrace();
-		// }
-		// }
-		// } else {
-		//
-		// }
 	}
-
 }

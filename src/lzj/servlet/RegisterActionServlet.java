@@ -31,7 +31,9 @@ public class RegisterActionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 	}
 
 	/**
@@ -43,14 +45,23 @@ public class RegisterActionServlet extends HttpServlet {
 		doGet(request, response);
 		String username = request.getParameter("username");
 		String password = request.getParameter("pwd");
-
-		UserDao userdao = new UserDaoImpl();
-		int stat = userdao.addUser(new User(0, username, password, null, null, 2, null, null));
-		if (stat == 1) {
-			System.out.println("添加成功");
+		String yzm = request.getParameter("yzm");
+		String rand = (String) request.getSession().getAttribute("rand");
+		if (rand.equals(yzm)) {
+			UserDao userdao = new UserDaoImpl();
+			int stat = userdao.addUser(new User(0, username, password, null, null, 2, null, null));
+			if (stat == 1) {
+				response.getWriter().print(
+						"<script language='JavaScript'>alert('添加成功');window.location.href='Login.jsp';</script>");
+			} else {
+				response.getWriter().print(
+						"<script language='JavaScript'>alert('用户名重复');window.location.href='Register.jsp';</script>");
+			}
 		} else {
-			System.out.println("添加失败");
+			response.getWriter().print(
+					"<script language='JavaScript'>alert('验证码错误');window.location.href='Register.jsp';</script>");
 		}
+
 	}
 
 }

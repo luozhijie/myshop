@@ -58,10 +58,9 @@ public class GoodsDaoImpl extends BaseDao implements GoodsDao {
 
 	@Override
 	public ArrayList<Goods> findGoodsByGoodsName(String goodName) {
-		String sql = "SELECT * FROM shop.v_goods_category_username where goodname = ?;";
-		Object[] o = { goodName };
+		String sql = "SELECT * FROM shop.v_goods_category_username where goodname like '%" + goodName + "%';";
 		ArrayList<Goods> arrayListGoods = new ArrayList<>();
-		ResultSet rs = this.execeuteQuary(sql, o);
+		ResultSet rs = this.execeuteQuary(sql, null);
 		try {
 			while (rs.next()) {
 				Category category = new Category(-1, rs.getString("categoryname"));

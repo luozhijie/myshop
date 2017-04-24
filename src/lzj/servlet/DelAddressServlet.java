@@ -7,21 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import lzj.DAO.GoodsDao;
-import lzj.DaoImpl.GoodsDaoImpl;
-import lzj.entity.Goods;
+import lzj.DAO.AddressDao;
+import lzj.DaoImpl.AddressDaoImpl;
+import lzj.entity.Address;
 
 /**
- * Servlet implementation class DelGoodsServlet
+ * Servlet implementation class DelAddressServlet
  */
-@WebServlet("/DelGoods")
-public class DelGoodsServlet extends HttpServlet {
+@WebServlet("/DelAddress")
+public class DelAddressServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DelGoodsServlet() {
+	public DelAddressServlet() {
 		super();
 	}
 
@@ -31,11 +31,10 @@ public class DelGoodsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		int gid = Integer.valueOf(request.getParameter("gid"));
-		GoodsDao goodsDao = new GoodsDaoImpl();
-		goodsDao.delGoods(new Goods(gid, null, null, null, null, null, 0, 0));
-		response.sendRedirect("ShopManager.jsp");
+		int aid = Integer.valueOf(request.getParameter("aid"));
+		AddressDao addressDao = new AddressDaoImpl();
+		addressDao.delAdderss(new Address(aid, null, null, null, 0));
+		response.sendRedirect("UserManager.jsp");
 	}
 
 	/**
@@ -45,6 +44,7 @@ public class DelGoodsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
+
 	}
 
 }
