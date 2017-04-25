@@ -36,15 +36,15 @@
 			</div>
 		</div>
 		<div class="form-group">
-		<img src="CreateImg.jsp" name="randImage" id="randImage"></img>
-		<div class="col-sm-offset-2 col-sm-5">
-		<label for="firstname" class="col-sm-5 control-label">验证码</label>
-		<div class="col-sm-5">
-			<input name="yzm" type="text" class="form-control" id="yzm"
-				placeholder="请输入验证码">
+			<img src="CreateImg.jsp" name="randImage" id="randImage"></img>
+			<div class="col-sm-offset-2 col-sm-5">
+				<label class="col-sm-5 control-label">验证码</label>
+				<div class="col-sm-5">
+					<input name="yzm" type="text" class="form-control" id="yzm"
+						placeholder="请输入验证码">
 				</div>
-		</div>
-		<a href="javascript:loadImage();">看不清，换一张</a>
+			</div>
+			<a href="javascript:loadImage();">看不清，换一张</a>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-5">

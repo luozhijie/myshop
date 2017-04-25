@@ -52,6 +52,8 @@ public class GoodsDaoImpl extends BaseDao implements GoodsDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			this.closeAll();
 		}
 		return arrayListGoods;
 	}
@@ -72,6 +74,8 @@ public class GoodsDaoImpl extends BaseDao implements GoodsDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			this.closeAll();
 		}
 		return arrayListGoods;
 	}
@@ -94,6 +98,8 @@ public class GoodsDaoImpl extends BaseDao implements GoodsDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			this.closeAll();
 		}
 		return arrayListGoods;
 	}
@@ -112,6 +118,20 @@ public class GoodsDaoImpl extends BaseDao implements GoodsDao {
 		String sql = "UPDATE `shop`.`good_list` SET `num`=`num`-? WHERE `gid`=?;";
 		Object[] o = { num, gid };
 		return this.exceuteUpdate(sql, o);
+	}
+
+	@Override
+	public int countNum() {
+		String sql = "SELECT count(*) as count FROM shop.good_list;";
+		ResultSet rs = this.execeuteQuary(sql, null);
+		try {
+			if (rs.next()) {
+				return rs.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 }

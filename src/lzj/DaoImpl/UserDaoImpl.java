@@ -52,6 +52,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			this.closeAll();
 		}
 		return arrayListUser;
 	}
@@ -77,6 +79,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			this.closeAll();
 		}
 		return arrayListUser;
 	}
@@ -102,6 +106,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			this.closeAll();
 		}
 		return arrayListUser;
 	}
@@ -109,7 +115,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	@Override
 	public User findUserByUserNameAndPassword(String username, String pwd) {
 		String sql = "SELECT * FROM shop.user_list where username=? and password=?;";
-		Object[] o = { username,pwd };
+		Object[] o = { username, pwd };
 		ResultSet rs = this.execeuteQuary(sql, o);
 		boolean hasUser = false;
 		User user = new User();
@@ -123,12 +129,14 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 				user.setUid(rs.getInt("uid"));
 				user.setUsername(rs.getString("username"));
 				user.setUserType(rs.getInt("usertype"));
-				hasUser=true;
+				hasUser = true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			this.closeAll();
 		}
-		if(hasUser){
+		if (hasUser) {
 			return user;
 		}
 		return null;

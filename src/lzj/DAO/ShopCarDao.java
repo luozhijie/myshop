@@ -24,4 +24,6 @@ public interface ShopCarDao {
 	public ShopCar findShopCarByUidAndGid(int uid, int gid);
 
 	public int addShopCarNum(int uid, int gid);
+	
+	public int delUidShopCar(int uid);
 }

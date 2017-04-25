@@ -43,6 +43,8 @@ public class ShopCarDaoImpl extends BaseDao implements ShopCarDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			this.closeAll();
 		}
 		return arrayListShopCar;
 	}
@@ -61,6 +63,8 @@ public class ShopCarDaoImpl extends BaseDao implements ShopCarDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			this.closeAll();
 		}
 		return arrayListShopCar;
 	}
@@ -102,6 +106,8 @@ public class ShopCarDaoImpl extends BaseDao implements ShopCarDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			this.closeAll();
 		}
 		if (arrayListShopCar.isEmpty()) {
 			return null;
@@ -114,5 +120,11 @@ public class ShopCarDaoImpl extends BaseDao implements ShopCarDao {
 		String sql = "UPDATE `shop`.`shop_car` SET  `num`=`num`+1 WHERE `uid`=? and `gid`=?;";
 		Object[] o = { uid, gid };
 		return this.exceuteUpdate(sql, o);
+	}
+
+	@Override
+	public int delUidShopCar(int uid) {
+		String sql = "DELETE FROM `shop`.`shop_car` WHERE `uid`=?;";
+		return this.exceuteUpdate(sql, new Object[] { uid });
 	}
 }

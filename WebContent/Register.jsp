@@ -75,14 +75,15 @@
 					placeholder="请输入确认密码" name="checkpwd">
 			</div>
 		</div>
-		
+
 		<div class="form-group">
-		<img src="CreateImg.jsp" name="randImage" id="randImage"></img>
-			<label for="lastname" class="col-sm-2 control-label"></label>
+			<img src="CreateImg.jsp" name="randImage" id="randImage"></img> <label
+				for="lastname" class="col-sm-2 control-label"></label>
 			<div class="col-sm-5">
-				<input type="password" class="form-control" id="yzm"
+				<input type="text" class="form-control" id="yzm"
 					placeholder="请输入验证码" name="yzm">
 			</div>
+			<a href="javascript:loadImage();">看不清，换一张</a>
 		</div>
 
 		<div class="form-group">

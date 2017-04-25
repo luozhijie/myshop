@@ -59,6 +59,8 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			this.closeAll();
 		}
 		return arrayListOrder;
 	}
@@ -84,6 +86,8 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			this.closeAll();
 		}
 		return arrayListOrder;
 	}
@@ -109,6 +113,8 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			this.closeAll();
 		}
 		return arrayListOrder;
 	}

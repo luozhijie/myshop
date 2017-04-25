@@ -44,6 +44,8 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			this.closeAll();
 		}
 		return arrayList;
 	}
@@ -60,6 +62,8 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			this.closeAll();
 		}
 		return arrayList;
 	}

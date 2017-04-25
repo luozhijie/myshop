@@ -34,7 +34,6 @@ public class BaseDao {
 
 			try {
 				conn = DriverManager.getConnection(url, user, password);
-				System.out.println("建立成功");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -83,6 +82,8 @@ public class BaseDao {
 			num = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			this.closeAll();
 		}
 		return num;
 	}
@@ -121,7 +122,6 @@ public class BaseDao {
 				result = rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			// closeAll();
@@ -133,6 +133,7 @@ public class BaseDao {
 		if (conn != null) {
 			try {
 				conn.close();
+				conn = null;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -140,6 +141,7 @@ public class BaseDao {
 		if (pstmt != null) {
 			try {
 				pstmt.close();
+				pstmt = null;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -147,6 +149,7 @@ public class BaseDao {
 		if (rs != null) {
 			try {
 				rs.close();
+				rs = null;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

@@ -41,6 +41,8 @@ public class RememberMeDaoImpl extends BaseDao implements RememberMeDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			this.closeAll();
 		}
 		return rememberMe;
 	}
@@ -57,6 +59,8 @@ public class RememberMeDaoImpl extends BaseDao implements RememberMeDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			this.closeAll();
 		}
 		return rememberMe;
 	}
@@ -73,6 +77,8 @@ public class RememberMeDaoImpl extends BaseDao implements RememberMeDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			this.closeAll();
 		}
 		return rememberMe;
 	}

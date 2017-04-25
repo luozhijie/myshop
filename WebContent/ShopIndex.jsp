@@ -87,6 +87,16 @@
 			<%
 				GoodsDao goodsDao = new GoodsDaoImpl();
 				int pages = 1;
+				if (request.getParameter("page") != null) {
+					pages = Integer.valueOf(request.getParameter("page"));
+				}
+
+				int listNum = goodsDao.countNum();
+				int lastPage = listNum / 10;
+				if (listNum % 10 > 0) {
+					lastPage++;
+				}
+
 				ArrayList<Goods> goodsList = goodsDao.findGoodsByPage(pages);
 				for (Goods g : goodsList) {
 			%>
@@ -100,8 +110,30 @@
 			<%
 				}
 			%>
-		</tbody>
-	</table>
 
+		</tbody>
+
+	</table>
+	<ul class="pagination pagination-lg">
+
+		<li><a <%if (pages > 1) {%>
+			href="ShopIndex.jsp?page=<%=(pages - 1)%>" <%}%>>&laquo;</a></li>
+
+		<%
+			int start = pages > 2 ? pages - 2 : 1;
+			int end = pages >= lastPage - 2 ? lastPage
+					: (lastPage > 5 ? (pages <= 2 ? (pages == 1 ? pages + 4 : pages + 3) : pages + 2) : lastPage);
+
+			for (; start <= end; start++) {
+		%>
+		<li <%if (pages == start) {%> class="active" <%}%>><a
+			href="ShopIndex.jsp?page=<%=start%>"><%=start%></a></li>
+		<%
+			}
+		%>
+
+		<li><a <%if (pages < lastPage) {%>
+			href="ShopIndex.jsp?page=<%=(pages + 1)%>" <%}%>>&raquo;</a></li>
+	</ul>
 </body>
 </html>

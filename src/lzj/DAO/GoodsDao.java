@@ -20,4 +20,6 @@ public interface GoodsDao {
 	public Goods findGoods(int gid);
 	
 	public int downNum(int gid, int num);
+	
+	public int countNum();
 }

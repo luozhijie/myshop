@@ -43,6 +43,8 @@ public class AddressDaoImpl extends BaseDao implements AddressDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			this.closeAll();
 		}
 		return arrayListAdress;
 	}
@@ -60,6 +62,8 @@ public class AddressDaoImpl extends BaseDao implements AddressDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			this.closeAll();
 		}
 		return arrayListAdress.get(0);
 	}
